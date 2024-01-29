@@ -9,7 +9,7 @@
     define("RUTA_APP", dirname(dirname(__FILE__)));
 
     //Ruta url
-    define("RUTA_URL", "https://192.168.4.245");
+    define("RUTA_URL", "https://192.168.4.220");
     //define("RUTA_URL", "/MVC");
 
     define("NOMBRE_SITIO", "MVC");
