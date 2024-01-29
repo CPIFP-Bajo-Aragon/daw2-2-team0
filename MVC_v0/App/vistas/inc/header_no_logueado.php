@@ -9,10 +9,10 @@
     <title>Catálogo Digital Bajo Aragón</title>
 </head>
 <body>
-    <nav class="navbar fixed-top">
+    <nav class="navbar bg-white fixed-top">
         <div class="container-fluid">
-            <a href=""><img class="img mt-1" src="/img/logoBA.png" alt="logoBA" style="width: 150px;"></a>
-            <button class="btn" type="submit">Iniciar Sesión</button>
+            <a href="<?php echo RUTA_URL ?>"><img class="img" src="/img/logoBA.png" alt="logoBA" style="width: 180px;"></a>
+            <a class="link-opacity-50-hover link-body-emphasis link-underline-opacity-0 link-underline-opacity-25-hover " href="<?php echo RUTA_URL ?>/login">Iniciar Sesión</a>
         </div>
     </nav>
     
