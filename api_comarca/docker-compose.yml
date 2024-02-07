@@ -1,0 +1,78 @@
+version: '3'
+
+# Red que vamos a establecer para los contenedores
+networks:
+  redv1: #Nombre de la red
+    driver: bridge #Tipo de la red
+    ipam:
+      config:
+        - subnet: 172.28.1.0/29 #Subred a la que pertenece
+          gateway: 172.28.1.1 #Puerta de enlace
+
+services:
+    php:    #Configuración del contenedor de PHP
+        build:
+            context: ./config/php   #Configuración que se va a utilizar para el despliegue del contenedor (Dockerfile y www.conf)
+        ports:
+            - 9000:9000     #Mapeo del puerto de php
+        volumes:
+            - ./web:/srv/www/api:ro     #Volumen creado de un fichero propio para alojar la web y poder trabajar con PHP (Solo lectura por seguridad)
+            - ./config/php/www.conf:/usr/local/etc/php-fpm.d/www.conf    #Volumen creado para actualizar la configuración de php unicamente restaurando los contenedores (Solo lectura por seguridad)
+        environment:    #Variables de entorno para el correcto funcionamiento del contenedor mysql
+            MYSQL_USER: ${DB_USER}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+        links:      #Link entre el contenedor de PHP y MySQL
+            - db
+        networks:
+          redv1:
+            ipv4_address: 172.28.1.2 # Dirección IP estática del contenedor PHP
+ 
+    nginx:      #Configuración del contenedor de nginx
+        image: nginx:latest     #Imagen de nginx que vamos a utilizar (:latest -> Última versión)
+        ports:
+            - 443:443   #Mapeo del puerto para https
+            - 80:80     #Mapeo del puerto de http
+        volumes:
+            - ./web:/srv/www/api:ro
+            - ./config/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+            - ./config/nginx/certificados:/etc/nginx/conf.d:ro
+        depends_on:
+            - php
+        networks:
+          redv1:
+            ipv4_address: 172.28.1.3 # Dirección IP estática del contenedor Nginx
+ 
+    pma:
+        image: phpmyadmin/phpmyadmin:latest
+        environment:
+            PMA_HOST: db
+            PMA_PORT: 3306
+            MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
+        ports:
+            - ${IP}:8000:80 # Dirección IP estática del contenedor PMA
+        depends_on:
+            - db
+        links:
+            - db:db
+        networks:
+          redv1:
+            ipv4_address: 172.28.1.4 # Dirección IP estática del contenedor PMA
+
+    db:
+        image: mysql:latest
+        ports:
+            - ${IP}:3306:3306 # Dirección IP estática del contenedor MySQL
+        command: "mysqld --init-file /data/application/init.sql"
+        volumes:
+            - ./data/init.sql:/data/application/init.sql
+            - db_data:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_HOST: '%'
+            MYSQL_DATABASE: "${DB_NAME}"
+            MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
+        networks:
+          redv1:
+            ipv4_address: 172.28.1.5 # Dirección IP estática del contenedor MySQL
+
+volumes:
+    db_data:
