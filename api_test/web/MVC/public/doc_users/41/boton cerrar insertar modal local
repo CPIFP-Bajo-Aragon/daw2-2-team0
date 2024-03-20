@@ -1,0 +1,43 @@
+
+        var closeButtonFooter = document.createElement("button");
+        closeButtonFooter.setAttribute("type", "button");
+        closeButtonFooter.classList.add("btn", "btn-secondary", "mt-5", "float-end", "ms-2");
+        closeButtonFooter.setAttribute("data-bs-dismiss", "modal");
+        closeButtonFooter.innerText = "Cerrar";
+        formulario.appendChild(closeButtonFooter);
+
+        var saveButton = document.createElement("button");
+        saveButton.setAttribute("type", "button");
+        saveButton.classList.add("btn", "btn-primary", "mt-5", "float-end");
+        saveButton.innerText = "Insertar";
+        formulario.appendChild(saveButton);
+        
+        
+        
+        
+        
+     
+        var label_municipio = document.createElement("label");
+        label_municipio.setAttribute("for","input_municipio");
+        label_municipio.innerText = "Ubicacion (municipio):";
+        form_grup10.appendChild(label_municipio);
+
+        var select_column = document.createElement("div");
+        select_column.classList.add("col-auto"); 
+        form_grup10.appendChild(select_column);
+
+        var input_municipio = document.createElement("select");
+        input_municipio.setAttribute("id", "input_municipio");
+        input_municipio.setAttribute("name", "input_municipio");
+        input_municipio.classList.add("form-select"); 
+        input_municipio.setAttribute("aria-label", "Default select example"); 
+        input_municipio.required = true;
+        form_grup10.appendChild(input_municipio);
+
+        nombre_municipio.municipio.forEach(function(element) {
+            var option = document.createElement("option");
+            option.setAttribute("value",element);
+            option.innerHTML = element;
+            input_municipio.appendChild(option);
+        });
+        

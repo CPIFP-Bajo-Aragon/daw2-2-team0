@@ -1,0 +1,3 @@
+¡Antes de levantar los contenedores!
+Cambiar IP del archivo .env por la IP del equipo actual.
+Cambiar la IP de acceso a la bd del archivo /web/MVC/App/config/configurar.php por la IP del equipo actual.

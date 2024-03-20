@@ -1,0 +1,89 @@
+version: '3.7'
+# Red que vamos a establecer para los contenedores
+networks:
+  redv1: #Nombre de la red
+    driver: bridge #Tipo de la red
+    ipam:
+      config:
+        - subnet: 172.28.1.0/29 #Subred a la que pertenece
+          gateway: 172.28.1.1 #Puerta de enlace
+
+services:
+    nginx-proxy:
+        image: nginx
+        container_name: nginx-proxy
+        ports:
+            - 443:443
+            - 80:80
+        volumes:
+            - /var/run/docker.sock:/tmp/docker.sock:ro
+            - ./config/certificados:/etc/ssl/certs
+            - ./config/proxy:/etc/nginx/conf.d
+        links:
+            - pma
+        depends_on:
+            - nginx
+        networks:
+          redv1:
+            ipv4_address: 172.28.1.2 # Dirección IP estática del contenedor PHP y NGINX
+ 
+    nginx:      #Configuración del contenedor de nginx
+        image: nginx:latest   #Imagen de nginx que vamos a utilizar (:latest -> Última versión)
+        container_name: nginx
+        volumes:
+            - ./web:/srv/www/api     #Volumen creado de un fichero propio para alojar la web
+            - ./config/nginx:/etc/nginx/conf.d:ro     #Volumen creado de un fichero propio para la configuracion del contenedor de nginx, en este caso para la configuración del virtualhost.
+        depends_on:
+            - php   #Contenedor del que depende
+        networks:
+          redv1:
+            ipv4_address: 172.28.1.3 # Dirección IP estática del contenedor PHP y NGINX
+
+    php:    #Configuración del contenedor de PHP
+        build:
+            context: ./config/php   #Configuración que se va a utilizar para el despliegue del contenedor (Dockerfile y www.conf)
+        ports:
+            - 9000:9000     #Mapeo del puerto de php
+        volumes:
+            - ./web:/srv/www/api    #Volumen creado de un fichero propio para alojar la web y poder trabajar con PHP (Solo lectura por seguridad)
+            - ./config/php/www.conf:/usr/local/etc/php-fpm.d/www.conf    #Volumen creado para actualizar la configuración de php unicamente restaurando los contenedores (Solo lectura por seguridad)
+        environment:    #Variables de entorno para el correcto funcionamiento del contenedor mysql
+            MYSQL_USER: ${DB_USER}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+        links:      #Link entre el contenedor de PHP y MySQL
+            - db
+        networks:
+          redv1:    #Red a la que pertenece
+            ipv4_address: 172.28.1.4 # Dirección IP estática del contenedor PHP
+            
+    pma:       #Configuración del contenedor de phpmyadmin
+        image: phpmyadmin/phpmyadmin:latest   #Imagen de phpmyadmin que vamos a utilizar (:latest -> Última versión)
+        environment:    #Variables de entorno que vamos a utilizar 
+            PMA_HOST: db
+            PMA_PORT: 3306  #Puerto de mysql
+            MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}" #Contraseña para el usuario root (Situada en el archivo .env)
+        ports:
+            - ${IP}:8000:80
+        depends_on:
+            - db    #Contenedor del que depende
+        links:
+            - db:db
+        networks:
+          redv1:    #Red a la que pertenece
+            ipv4_address: 172.28.1.5 # Dirección IP estática del contenedor PMA
+
+    db:     #Configuración del contenedor mysql
+        image: mysql:latest     #Imagen de mysql que vamos a utilizar (:latest -> Última versión)
+        ports:
+            - ${IP}:3306:3306   #Mapeo del puerto de mysql
+        volumes:
+            - ./data:/docker-entrypoint-initdb.d
+        environment:
+            MYSQL_ROOT_HOST: '%'
+            MYSQL_DATABASE: "${DB_NAME}"
+            MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
+        networks:
+            redv1:
+                ipv4_address: 172.28.1.6 # Dirección IP estática del contenedor MySQL
+
+

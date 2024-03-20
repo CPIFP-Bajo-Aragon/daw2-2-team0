@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" integrity="...">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="..." defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <title>Practica Bootstrap</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-info">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Pirineo Aragonés</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                <ul class="navbar-nav nav-tabs me-auto mb-2 mb-lg-0 border-bottom">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Valles y Montañas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Patrimonio Histórico</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Estaciones de esquí
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="https://www.astun.com/es" target="_blank">Astún</a></li>
+                            <li><a class="dropdown-item" href="http://www.candanchu.com/" target="_blank">Candanchú</a></li>
+                            <li><a class="dropdown-item" href="http://www.cerler.com/" target="_blank">Cerler</a></li>
+                            <li><a class="dropdown-item" href="http://www.formigal-panticosa.com/" target="_blank">Formigal - Panticosa</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Usuario" aria-label="Usuario">
+                    <input class="form-control me-2" type="search" placeholder="Contraseña" aria-label="Contraseña">
+                    <button class="btn btn-outline-light" type="submit">Login</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="m-3 bg-secondary-subtle rounded">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb p-2">
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Pirineo Aragonés</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Inicio</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div id="carouselExampleSlidesOnly" class="carousel slide bg-secondary-subtle rounded m-3 p-4" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active pt-3">
+                <h3>Parque Nacional de Ordesa y Monte Perdido</h3>
+                <p>El Macizo de Monte Perdido es una formación caliza y la altitud de su pico más alto, es de 3348 metros. Su nombre en la zona es Las Tres Serols.</p>
+                <hr>
+                <p>El Parque se encuentra situado en el Pirineo Aragonés, en la provincia de Huesca y a su vez en la comarca de Sobrarbe, es limítrofe por el norte con el Parc National des Pyrénées en Francia. Su territorio pertenece a los municipios de Torla, Puértolas, Fanlo, Tella-Sin y Bielsa, más el Ayuntamiento de Broto que tiene territorio en la zona de influencia del parque.</p>
+                <button class="btn btn-success rounded-5 mb-md-5">Más información</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="px-3 px-md-5">
+        <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-12 mt-4 mt-md-2">
+                <div class="card">
+                    <div class="py-1 px-3 bg-body-secondary text-uppercase">
+                        <h3>Ainsa</h3>
+                    </div>
+                    <img src="img/Ainsa.jpg" class="img-fluid border border-1 rounded" alt="Ainsa">
+                    <div class="card-body">
+                        <p>L'Ainsa se encuentra situada estratégicamente en la confluencia de los ríos Cinca y Ara, sobre un alto a 589 m. de altitud, desde dónde se domina todo el entorno.</p>
+                        <p>En un lugar privilegiado, entre el Parque Nacional de Ordesa y Monte Perdido, el Parque Natural de los Cañones y la Sierra de Guara y el Parque Natural Posets-Maladeta, Ainsa es la encrucijada más importante de vías de comunicación de este sector pirenaico.</p>
+                    </div>
+                    <div class="p-2 bg-body-secondary">
+                        <p>Capital del Sobrarbe</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-6 col-lg-6 col-md-6 col-12 mt-4 mt-md-2">
+                <div class="card">
+                    <div class="py-1 px-3 bg-body-secondary text-uppercase">
+                        <h3>Carnval de Bielsa</h3>
+                    </div>
+                    <img src="img/carnaval-bielsa.jpg" class="img-fluid border border-1 rounded" alt="Carnval Bielsa">
+                    <div class="card-body">
+                        <p>El Carnaval de Bielsa se viene celebrando desde tiempos inmemorables, y sigue conservando la esencia de la fiesta, debido a sus singulares personajes.</p>
+                        <p>Las trangas, son mozos solteros que van vestidos con la piel y los cuernos de un macho cabrío, una saya, unas abarcas y grandes esquillas en la cintura. Simbolizan la fertilidad.</p>
+                        <p>Las madamas, son las mozas solteras, que son recogidas por los trangas al hacer la ronda por la puerta de su casa. En sus trajes se combinan las sedas, brocados, rasos y cintas de colores. </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-12 mt-4 mt-md-2">
+                <div class="card">
+                    <div class="py-1 px-3 bg-body-secondary text-uppercase">
+                        <h3>Cola de caballo</h3>
+                    </div>
+                    <img src="img/cola-caballo.jpg" class="img-fluid border border-1 rounded" alt="Bielsa">
+                    <div class="card-body">
+                        <p>La ruta hasta la Cola de Caballo por el camino clásico del valle de Ordesa es una de las excursiones más populares y conocidas de los Pirineos.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-12 mt-4 mt-md-2">
+                <div class="card">
+                    <div class="py-1 px-3 bg-body-secondary text-uppercase">
+                        <h3>El cañón de Añisclo</h3>
+                    </div>
+                    <img src="img/canyon-anyisclo.jpg" class="img-fluid border border-1 rounded" alt="Añisclo">
+                    <div class="card-body">
+                        <p>El Cañón de Añisclo, generado por el río Bellós, está orientado de norte a sur y se prolonga a lo largo de casi 25 kilómetros, desde el Circo de Añisclo hasta la confluencia con el valle de Aso. </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-12 mt-4 mt-md-2">
+                <div class="card">
+                    <div class="py-1 px-3 bg-body-secondary text-uppercase">
+                        <h3>Ibón de plan</h3>
+                    </div>
+                    <img src="img/ibon-plan.jpg" class="img-fluid border border-1 rounded" alt="Ibón">
+                    <div class="card-body">
+                        <p class="card-text text-justify">El Ibón de Plan también conocido como Basa de la Mora, es considerado como uno de los ibones más bellos del pirineo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <hr class="mt-5 mt-md-4">
+        <div class="d-flex flex-row">
+            <p class="px-4">Diseño de Interfaces Web - CPIFP BAJO ARAGÓN</p>
+            <a href=""><i class="bi bi-arrow-up-circle-fill text-info"></i></a>
+        </div>
+    </footer>
+
+</body>
+</html>
