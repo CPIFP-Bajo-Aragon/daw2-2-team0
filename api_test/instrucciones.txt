@@ -1,3 +1,5 @@
 ¡Antes de levantar los contenedores!
 Cambiar IP del archivo .env por la IP del equipo actual.
 Cambiar la IP de acceso a la bd del archivo /web/MVC/App/config/configurar.php por la IP del equipo actual.
+Instalar con composer la libreria google/apiclient:^2.15.0
+Descargar la libreria PHPMailer y añadirla a librerias.
